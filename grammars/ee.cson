@@ -1,46 +1,56 @@
 'scopeName': 'text.html.ee'
-'fileTypes': [
-  'html'
-]
-'foldingStartMarker': '(^\\s*/\\*|(\\{|\\[|\\()\\s*$)'
-'foldingStopMarker': '(\\*/|^\\s*(\\}|\\]|\\)))'
+'fileTypes': []
 'name': 'ExpressionEngine'
 'patterns': [
   {
-    'include': 'text.html.basic'
-  }
-  {
-    'captures': {
-      '1':
-        'name': 'entity.ee.tag.open'
-      '2':
-        'name': 'entity.ee.tag.module'
-      '3':
-        'name': 'entity.ee.tag.method'
-    }
-    'match': '(exp):(\\w*)(:(\\w*))?'
+    'include': '#core-tag'
   }
   {
     'include': '#components'
   }
+  {
+    'include': 'text.html.php'
+  }
 ]
 'repository': {
+  'core-tag': {
+        'begin': '({\/*exp):(\\w*):(\\w*)?'
+        'beginCaptures': {
+          '1':
+            'name': 'keyword.ee.core'
+          '2':
+            'name': 'keyword.ee.module'
+          '3':
+            'name': 'keyword.ee.method'
+        }
+        'end': '(}(?!"))'
+        'endCaptures': {
+          '1':
+            'name': 'keyword.ee.core'
+        }
+        'patterns': [
+            {
+                'include': '#components'
+            }
+            {
+                'include': '#double-quote'
+            }
+            {
+                'include': '#single-quote'
+            }
+            {
+                'match': '\\w+'
+                'name': 'variable.parameter.ee'
+            }
+        ]
+  }
   'components': {
     'patterns': [
-      {
-        'include': '#conditional'
-      }
-      {
-        'include': '#double-quote'
-      }
-      {
-        'include': '#single-quote'
-      }
       {
         'include': '#comment'
       }
       {
-        'include': '#params'
+        'include': '#conditional'
       }
       {
         'include': '#variable'
@@ -58,76 +68,114 @@
   'conditional': {
     'patterns': [
       {
-        'match': '{\/(if)}',
-        'captures': {
-          '1':
-            'name': 'keyword.ee.other'
-        }
-      }
-      {
-        'begin': '{(if)',
+        'begin': '({)(if)(:else)?',
         'beginCaptures': {
           '1':
-            'name': 'keyword.ee.other'
+            'name': 'keyword.ee.core'
+          '2':
+            'name': 'keyword.ee.control'
+          '3':
+            'name': 'keyword.ee.method'
         }
-        'end': '}$'
+        'end': '(})'
         'endCaptures': {
           '1':
-            'name': 'keyword.ee.other'
+            'name': 'keyword.ee.core'
         }
         'patterns': [
+          {
+            'include': '#double-quote'
+          }
+          {
+            'include': '#single-quote'
+          }
           {
             'include': '#components'
           }
           {
-            'include': '#variable'
+            'match': '[!=><]'
+            'name': 'keyword.ee.operator'
           }
           {
-            'match': '\\w'
-            'name': 'variable.parameter.ee'
+            'match': '\\w+'
+            'name': 'variable.ee'
           }
         ]
       }
-    ]
-  }
-  'params': {
-    'beginCaptures': {
-      '1':
-        'name': 'variable.parameter.ee'
-    }
-    'begin': '(\\w+)='
-    'patterns': [
       {
-        'name': 'string.ee.quoted.single'
-        'match': '\'{?(\\w|:)+}?\''
-      }
-      {
-        'name': 'string.ee.quoted.double'
-        'match': '\"{?(\\w|:)+}?\"'
+        'match': '({\/if})',
+        'captures': {
+          '1':
+            'name': 'keyword.ee.core'
+        }
       }
     ]
-    'end': '}'
   }
   'variable': {
-    'match': '({(\\w+)})',
+    'match': '({)([\\w:]+)(})',
     'captures': {
       '1':
+        'name': 'keyword.ee.core'
+      '2':
         'name': 'variable.other.ee'
+      '3':
+        'name': 'keyword.ee.core'
     }
-  },
-  'single-quote': {
-    'name': 'string.ee.quoted.double'
-    'match': '\'\\S+\''
-  }
-  'double-quote': {
-    'name': 'string.ee.quoted.double'
-    'match': '"\\S+"'
   }
   'variable-pair': {
-    'match': '{\/?(?!exp)((\\w|:)+)'
-    'captures': {
+    'begin': '({\/*(?!exp))(\\w*)'
+    'beginCaptures': {
       '1':
+        'name': 'keyword.ee.core'
+      '2':
         'name': 'variable.other.ee'
     }
+    'end': '(}(?!"))'
+    'endCaptures': {
+      '1':
+        'name': 'keyword.ee.core'
+    }
+    'patterns': [
+        {
+            'include': '#components'
+        }
+        {
+            'include': '#double-quote'
+        }
+        {
+            'include': '#single-quote'
+        }
+        {
+            'match': '\\w+'
+            'name': 'variable.parameter.ee'
+        }
+    ]
   }
+  'single-quote': {
+    'begin': '\'(.*?)'
+    'end': '\''
+    'patterns': [
+      {
+        'include': '#components'
+      }
+      {
+        'match': '\\w+'
+        'name': 'string.ee.quoted.single'
+      }
+    ]
+  }
+  'double-quote': {
+    'begin': '\"(.*?)'
+    'end': '\"'
+    'patterns': [
+      {
+        'include': '#components'
+      }
+      {
+        'match': '\\w+'
+        'name': 'string.ee.quoted.double'
+      }
+    ]
+  }
+  
 }

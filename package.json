@@ -2,8 +2,8 @@
   "name": "language-expressionengine",
   "version": "0.2.3",
   "private": true,
-  "description": "Syntax Highlighting for ExpressionEngine templates",
-  "repository": "https://github.com/objectivehtml/language-expressionengine",
+  "description": "Syntax Highlighting for ExpressionEngine templates based on https://github.com/objectivehtml/language-expressionengine",
+  "repository": "https://github.com/rushl/language-expressionengine",
   "license": "MIT",
   "engines": {
     "atom": ">0.50.0"
