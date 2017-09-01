@@ -55,7 +55,7 @@
         'include': '#conditional'
       }
       {
-        'include': '#variable'
+        'include': '#simple-variable'
       }
       {
         'include': '#variable-pair'
@@ -119,8 +119,8 @@
       }
     ]
   }
-  'variable': {
-    'match': '({)([\\w:]+)(})',
+  'simple-variable': {
+    'match': '({\/?)([\\w]+)(})',
     'captures': {
       '1':
         'name': 'keyword.ee.core'
