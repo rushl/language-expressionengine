@@ -58,7 +58,7 @@
         'include': '#simple-variable'
       }
       {
-        'include': '#variable-pair'
+        'include': '#complex-variable'
       }
     ]
   }
@@ -130,15 +130,19 @@
         'name': 'keyword.ee.core'
     }
   }
-  'variable-pair': {
-    'begin': '({\/*(?!exp))(\\w*)'
+  'complex-variable': {
+    'begin': '({(?!\/?exp|\/?if)\/?)(\\w*)?(:?)(\\w*)?'
     'beginCaptures': {
-      '1':
-        'name': 'keyword.ee.core'
-      '2':
-        'name': 'variable.other.ee'
+        '1':
+            'name': 'keyword.ee.core'
+        '2':
+            'name': 'variable.complex-tag.ee'
+        '3':
+            'name': 'keyword.ee.core'
+        '4':
+            'name': 'variable.complex-tag-method.ee'
     }
-    'end': '(}(?!"))'
+    'end': '(})'
     'endCaptures': {
       '1':
         'name': 'keyword.ee.core'
