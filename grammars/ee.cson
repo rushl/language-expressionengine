@@ -1,13 +1,17 @@
 'scopeName': 'text.html.ee'
 'fileTypes': []
 'name': 'ExpressionEngine'
+'injections':
+    'L:text.html.ee':
+        'patterns': [
+            {
+                'include': '#components'
+            }
+            {
+                'include': '#core-tag'
+            }
+        ]
 'patterns': [
-  {
-    'include': '#core-tag'
-  }
-  {
-    'include': '#components'
-  }
   {
     'include': 'text.html.php'
   }
