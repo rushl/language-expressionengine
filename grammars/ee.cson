@@ -70,13 +70,15 @@
   'conditional': {
     'patterns': [
       {
-        'begin': '({)(if)(:else)?',
+        'begin': '({)(if)(:)?(else)?',
         'beginCaptures': {
           '1':
             'name': 'keyword.ee.core'
           '2':
             'name': 'keyword.ee.control'
           '3':
+            'name': 'keyword.ee.core'
+          '4':
             'name': 'keyword.ee.method'
         }
         'end': '(})'
@@ -105,9 +107,13 @@
         ]
       }
       {
-        'match': '({\/if})',
+        'match': '({\/)(if)(})',
         'captures': {
           '1':
+            'name': 'keyword.ee.core'
+          '2':
+            'name': 'keyword.ee.control'
+          '3':
             'name': 'keyword.ee.core'
         }
       }
