@@ -14,13 +14,15 @@
 ]
 'repository': {
   'core-tag': {
-        'begin': '({\/*exp):(\\w*):(\\w*)?'
+        'begin': '({\/*exp:)(\\w*)(:)(\\w*)?'
         'beginCaptures': {
           '1':
             'name': 'keyword.ee.core'
           '2':
             'name': 'keyword.ee.module'
           '3':
+            'name': 'keyword.ee.core'
+          '4':
             'name': 'keyword.ee.method'
         }
         'end': '(}(?!"))'
