@@ -29,7 +29,7 @@
           '4':
             'name': 'keyword.ee.method'
         }
-        'end': '(}(?!"))'
+        'end': '(})' # This was (}(?!")) - but that was causing issues with "{exp:XX:XX}" tags in double quotes. Don't know why the negative-lookahead was there.
         'endCaptures': {
           '1':
             'name': 'keyword.ee.core'
@@ -74,7 +74,7 @@
   'conditional': {
     'patterns': [
       {
-        'begin': '({)(if)(:)?(else)?',
+        'begin': '({)(if)(:)?(else\b|elseif\b)?',
         'beginCaptures': {
           '1':
             'name': 'keyword.ee.core'
