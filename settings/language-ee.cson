@@ -1,0 +1,4 @@
+'.text.html.ee':
+  'editor':
+    'commentStart': '{!-- '
+    'commentEnd': ' --}'
